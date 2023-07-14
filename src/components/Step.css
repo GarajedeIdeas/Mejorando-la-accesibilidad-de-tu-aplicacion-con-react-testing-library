@@ -1,0 +1,96 @@
+:root {
+  --border-color: #f4f4f4;
+}
+
+.step {
+  display: flex;
+  position: relative;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  counter-increment: step;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* ::before is the line between steps */
+.step::before {
+  position: absolute;
+  top: 0.75rem;
+  left: -50%;
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+  content: "";
+}
+
+.step.active::before,
+.step.completed::before {
+  border-color: #aaa;
+}
+
+.step:first-child::before {
+  display: none;
+}
+
+.circle {
+  display: grid;
+  place-content: center;
+  z-index: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.87);
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #242424;
+}
+
+.circle::before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: counter(step);
+}
+
+.active .circle {
+  color: #242424;
+}
+
+.completed .circle::before {
+  content: initial;
+}
+
+.completed .circle {
+  border-color: rgba(255, 255, 255, 0.87);
+}
+
+.active .circle {
+  border-color: var(--accent);
+  background-color: var(--accent);
+}
+
+.label {
+  display: block;
+  margin: 0.5rem 0.75rem 0;
+  width: 100%;
+  text-align: center;
+}
+
+.icon {
+  font: initial;
+  letter-spacing: initial;
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important; /* 2 */
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important; /* 3 */
+}
